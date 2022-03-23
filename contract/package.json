@@ -1,0 +1,16 @@
+{
+  "name": "contract",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "IJONI VICTOR",
+  "license": "ISC",
+  "dependencies": {
+    "solc": "^0.4.25",
+    "web3": "^1.7.1"
+  }
+}
