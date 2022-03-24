@@ -21,9 +21,22 @@ npm install
 ```
 
 ### SET UP BLOCKCHAIN
-You can copy the code in 'wallet.sol' without line 1 and paste in [Link Remix](https://remix.ethereum.org) or 
+You can copy the code in 'wallet.sol' without line 1 and paste in [Remix](https://remix.ethereum.org) or 
 
-download [Link Ganache](https://trufflesuite.com/ganache/index.html)
+Download [Ganache](https://trufflesuite.com/ganache/index.html) which is a local blockchain that you can run the smart contract or 
+
+Install Ganache-cli using the following command
+
+```
+npm install ganache-cli
+```
+
+After install of the Ganache-cli, run the following command to get access to your local blockchain
+
+```
+ganache-cli
+```
+
 
 ### FRONTEND INSTALLATION
 
