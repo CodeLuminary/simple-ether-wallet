@@ -84,7 +84,7 @@ npm run test
 
 ## 🎩 Author
 
-- IJONI VICTOR 😁😁😁
+- IJONI VICTOR  
 
-> Don't forget to star the project 😁😁 . Thanks
+> Don't forget to star the project :) :) . Thanks
 
