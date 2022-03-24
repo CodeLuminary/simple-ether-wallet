@@ -20,6 +20,11 @@ Enter the following command
 npm install
 ```
 
+### SET UP BLOCKCHAIN
+You can copy the code in 'wallet.sol' without line 1 and paste in [Link Remix](https://remix.ethereum.org) or 
+
+download [Link Ganache](https://trufflesuite.com/ganache/index.html)
+
 ### FRONTEND INSTALLATION
 
 cd or navigate to the frontend folder in your terminal and enter the following command 
