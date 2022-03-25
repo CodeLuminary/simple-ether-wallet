@@ -6,22 +6,7 @@ Kindly fork and clone the repo
 
 ## Installation
 
-### SMART CONTRACT SETUP
-
-cd to the contract folder in your terminal by using the following command
-
-```
-cd contract
-```
-
-Enter the following command 
-
-```
-npm install
-```
-
-### SET UP BLOCKCHAIN
-You can copy the code in 'wallet.sol' without line 1 and paste in [Remix](https://remix.ethereum.org) or 
+### SET UP LOCAL BLOCKCHAIN
 
 Download [Ganache](https://trufflesuite.com/ganache/index.html) which is a local blockchain that you can run the smart contract or 
 
@@ -36,6 +21,10 @@ After install of the Ganache-cli, run the following command to get access to you
 ```
 ganache-cli
 ```
+
+### SMART CONTRACT SETUP
+
+You can copy the code in 'wallet.sol' and paste in [Remix](https://remix.ethereum.org), then compile and deploy to local blockchain.
 
 
 ### FRONTEND INSTALLATION
