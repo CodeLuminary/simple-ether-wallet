@@ -1,5 +1,3 @@
-
-
 const filename = "userController.js";
 
 class AccountController{
