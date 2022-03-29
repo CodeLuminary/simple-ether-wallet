@@ -11,8 +11,6 @@ const app = express();
 const numCpu = os.cpus().length;
 
 if(process.env.NODE_ENV === 'production'){
-    allSettled = require('promise.allsettled');
-    allSettled.shim();
     app.use(cors(
         {origin: '*'}
      ));
