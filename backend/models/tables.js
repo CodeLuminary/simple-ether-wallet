@@ -18,18 +18,41 @@ const Users = db.define('users',{
         type: Sequelize.STRING(200),
         allowNull: false
     },
-    wallet: {
-        type: Sequelize.TEXT
+    is_verified:{
+        type: Sequelize.BOOLEAN,
+        default: false
+    },
+    is_enabled:{
+        type: Sequelize.BOOLEAN,
+        default: true
     }
 })
 
 const Wallet = db.define('wallet',{
-
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
+    public_key:{type: Sequelize.TEXT, allowNull: false},
+    private_key: {type: Sequelize.TEXT, allowNull: false},
+    balance: {type: Sequelize.INTEGER}
 })
+
+Users.hasMany(Wallet)
 
 const Transactions = db.define('transactions',{
-    
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
+    hash: {type: Sequelize.TEXT, allowNull: false}
 })
+
+Users.hasMany(Transactions)
 
 module.exports = {
     db,
