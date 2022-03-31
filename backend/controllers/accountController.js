@@ -1,12 +1,9 @@
-const filename = "userController.js";
 const web3 = require('web3');
-const myAddress = '0x8805f14dfE9623a892B1c2F6A8e7d33006E5debF'
-
 const {getContractInfo, getContractAddress,getCurrentDateTimeInDatabaseFormat, getWeb3Url} = require('../config/config');
+const filename = "userController.js";
+const errorLogger = require('../data/errorLogger')
 
-console.log(getWeb3Url(), "url")
-const web = new web3(getWeb3Url());
-//console.log(getContractAddress(),'contract address')
+//const web = new web3(getWeb3Url());
 
 /*web.eth.net.getId()
 .then(async (result)=>{
@@ -77,15 +74,59 @@ console.log(web3.utils.toWei("1",'ether'), "web3")
 
 class AccountController{
 
-    static registerUser = async (req,res)=>{
+    static registerUser = async (userObject)=>{
            
     }
 
-    static loginUser = async (req,res)=>{
+    static loginUser = async (userObject)=>{
         
     }
-    static transferEther = async (req, res)=>{
-        web.eth.net.getId()
+    static transferEther = async (userObject)=>{
+        const web = new web3(getWeb3Url());
+        //const networkId = await web.eth.net.getId();
+
+        const transaction = {
+            from: userObject.address,
+            to: getContractAddress(),
+            value: web3.utils.toWei(userObject.value,'ether'),
+            //chainId: result,
+            gas: 500000,
+            nonce: await web.eth.getTransactionCount(userObject.address, 'latest')
+        }
+
+        return new Promise((resolve,reject)=>{
+            web.eth.accounts.signTransaction(transaction, userObject.private_key)
+            .then(result=>{
+                //console.log(result,"result");
+
+                web.eth.sendSignedTransaction(result.rawTransaction,(error,hash)=>{
+                        if(error){                         
+                            errorLogger.constructDetailedError(filename, 'transferEther', error);
+                            resolve({
+                                isSuccessful: false,
+                                message: 'Server error',
+                                status_code: 510
+                            })
+                        }
+                        else{
+                            resolve({
+                                isSuccessful: true,
+                                status_code: 200,
+                                message: 'Ether sent successfully',
+                                hash
+                            })
+                        }
+                    })
+            })
+            .catch(error=>{
+                errorLogger.constructDetailedError(filename, 'transferEther', error);
+                resolve({
+                    isSuccessful: false,
+                    message: 'Server error',
+                    status_code: 509
+                })
+            })
+        })
     }
 }
 
