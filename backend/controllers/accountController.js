@@ -36,14 +36,7 @@ const errorLogger = require('../data/errorLogger')
     console.log(err,'err') 
 })*/
 
-web.eth.getBalance('0x412f2d3e68153FCed6e1a54A8bc7f015b3AF401B', (error, result)=>{
-    if(error){
-        console.log(error, "balance error");
-    }
-    else{
-        console.log(web3.utils.fromWei(result), "user Balance")
-    }
-})
+
 
 //var ac = web.eth.accounts.create()
 //console.log(ac, "account")

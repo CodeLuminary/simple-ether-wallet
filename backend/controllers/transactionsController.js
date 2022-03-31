@@ -50,6 +50,29 @@ class TransactionsController{
             })
         })
     }
+
+    static getEtherWalletBalance = async(userObject)=>{
+        const web = new web3(getWeb3Url());
+        web.eth.getBalance(userObject.address, (error, result)=>{
+            if(error){
+                errorLogger.constructDetailedError(filename, 'getEtherWalletBalance', error);
+                resolve({
+                    isSuccessful: false,
+                    message: 'Server error',
+                    status_code: 509
+                })
+            }
+            else{
+                //console.log(web3.utils.fromWei(result), "user Balance")
+                resolve({
+                    isSuccessful: true,
+                    message: 'User balance gotten successfully',
+                    status_code: 200,
+                    balance: web3.utils.fromWei(result)
+                })
+            }
+        })
+    }
 }
 
 module.exports = TransactionsController;
