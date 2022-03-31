@@ -23,6 +23,14 @@ const Users = db.define('users',{
     }
 })
 
+const Wallet = db.define('wallet',{
+
+})
+
+const Transactions = db.define('transactions',{
+    
+})
+
 module.exports = {
     db,
     Users

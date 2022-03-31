@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const os = require('os');
 const cluster = require('cluster');
 const accountRoutes = require('./routes/accountRoutes');
-
+const transactionsRoutes = require('./routes/transactionsRoutes')
 
 const app = express();
 const numCpu = os.cpus().length;
@@ -22,6 +22,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
 app.use('/account',accountRoutes);
+app.use('/transaction', transactionsRoutes)
 
 app.all('/*',(req,res)=>{
      res.status(404).send({
