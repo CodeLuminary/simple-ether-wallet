@@ -43,6 +43,7 @@ const getCurrentDateTimeInDatabaseFormat = () =>{
 }
 
 const getWeb3Url = ()=>{
+    console.log('in config file')
     return process.env.WEB3_URL
 }
 

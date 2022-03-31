@@ -34,7 +34,7 @@ app.all('/*',(req,res)=>{
     for(let i = 0; i < numCpu; i++){
         cluster.fork()
     }
- }
+ } 
  else{
     if(process.env.NODE_ENV === 'production'){
         app.listen();
@@ -45,4 +45,4 @@ app.all('/*',(req,res)=>{
             console.log(`Server ${process.pid} started on port ${port}`)
         });
     }
- }
+ }  
