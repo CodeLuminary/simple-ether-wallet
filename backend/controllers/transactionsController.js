@@ -9,9 +9,9 @@ class TransactionsController{
 
         const transaction = {
             from: userObject.address,
-            to: getContractAddress(),
+            to: userObject.isToContract ? getContractAddress() : userObject.reciever_address,
             value: web3.utils.toWei(userObject.value,'ether'),
-            //chainId: result,
+            //chainId: networkId,
             gas: 500000,
             nonce: await web.eth.getTransactionCount(userObject.address, 'latest')
         }
