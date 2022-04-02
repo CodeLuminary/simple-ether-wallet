@@ -1,6 +1,7 @@
 const web3 = require('web3');
 const {getContractInfo, getContractAddress,getCurrentDateTimeInDatabaseFormat, getWeb3Url} = require('../config/config');
 const filename = "userController.js";
+const {Transaction} = require('../models/tables.js')
 
 class TransactionsController{
     static transferEther = async (userObject)=>{
@@ -72,6 +73,23 @@ class TransactionsController{
                 })
             }
         })
+    }
+
+    static createEtherAccount = async (userObject) =>{
+        const web = new web3(getWeb3Url());
+        const newAccount = web.eth.accounts.create();
+
+        /* FORMAT OF THE ACCOUNT (the newAccount variable)
+              {
+                address: '0x412f2d3e68153FCed6e1a54A8bc7f015b3AF401B',
+                privateKey: '0x02cf38e42116f3a7e0a6fc5f3921d1350df8a54d003eaa9fa90375826a85777d',
+                signTransaction: [Function: signTransaction],
+                sign: [Function: sign],
+                encrypt: [Function: encrypt]
+            } 
+         */
+
+
     }
 }
 

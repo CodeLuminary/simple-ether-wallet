@@ -56,5 +56,6 @@ Users.hasMany(Transactions)
 
 module.exports = {
     db,
-    Users
+    Users,
+    Transactions
 }

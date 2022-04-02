@@ -42,13 +42,7 @@ let cryptr = new Cryptr(getSecretKey());
 //var ac = web.eth.accounts.create()
 //console.log(ac, "account")
 /*
-    {
-  address: '0x412f2d3e68153FCed6e1a54A8bc7f015b3AF401B',
-  privateKey: '0x02cf38e42116f3a7e0a6fc5f3921d1350df8a54d003eaa9fa90375826a85777d',
-  signTransaction: [Function: signTransaction],
-  sign: [Function: sign],
-  encrypt: [Function: encrypt]
-} account
+  account
 */
 
 //console.log(web3.utils.toWei("1",'ether'), "web3")
