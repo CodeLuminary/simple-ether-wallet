@@ -37,14 +37,6 @@ let cryptr = new Cryptr(getSecretKey());
     })
 */
 
-
-
-//var ac = web.eth.accounts.create()
-//console.log(ac, "account")
-/*
-  account
-*/
-
 //console.log(web3.utils.toWei("1",'ether'), "web3")
 
  

@@ -1,7 +1,8 @@
 const web3 = require('web3');
-const {getContractInfo, getContractAddress,getCurrentDateTimeInDatabaseFormat, getWeb3Url} = require('../config/config');
+const {getContractInfo, getSecretKey, getContractAddress,getCurrentDateTimeInDatabaseFormat, getWeb3Url} = require('../config/config');
 const filename = "userController.js";
 const {Transaction} = require("../models/tables");
+
 
 class TransactionsController{
     static transferEther = async (userObject)=>{
@@ -79,6 +80,21 @@ class TransactionsController{
         const web = new web3(getWeb3Url());
         const newAccount = web.eth.accounts.create();
 
+        Transactions.create({
+            userId: userObject.userId,
+            public_key: newAccount.address,
+            private_key: web.eth.accounts.encrypt(newAccount.privateKey, getSecretKey())
+        })
+
+        resolve({
+            isSuccessful: true,
+            status_code: 200,
+            account: {
+                private_key: newAccount.privateKey,
+                address: newAccount.address
+            }
+        })
+
         /* FORMAT OF THE ACCOUNT (the newAccount variable)
               {
                 address: '0x412f2d3e68153FCed6e1a54A8bc7f015b3AF401B',
@@ -88,7 +104,6 @@ class TransactionsController{
                 encrypt: [Function: encrypt]
             } 
          */
-
 
     }
 }
