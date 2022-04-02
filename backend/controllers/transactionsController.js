@@ -85,14 +85,15 @@ class TransactionsController{
             public_key: newAccount.address,
             private_key: web.eth.accounts.encrypt(newAccount.privateKey, getSecretKey())
         })
-
-        resolve({
-            isSuccessful: true,
-            status_code: 200,
-            account: {
-                private_key: newAccount.privateKey,
-                address: newAccount.address
-            }
+        return new Promise((resolve,reject)=>{
+            resolve({
+                isSuccessful: true,
+                status_code: 200,
+                account: {
+                    private_key: newAccount.privateKey,
+                    address: newAccount.address
+                }
+            })
         })
 
         /* FORMAT OF THE ACCOUNT (the newAccount variable)
@@ -104,7 +105,43 @@ class TransactionsController{
                 encrypt: [Function: encrypt]
             } 
          */
+    }
 
+    static transferEtherFromContractToUser = async (userObject)=>{
+        const contractInfo = getContractInfo();
+        const web = new web3(getWeb3Url());
+        const smartContract = new web.eth.Contract(contractInfo.abi, getContractAddress());
+
+        return new Promise((resolve, reject)=>{
+            smartContract.methods.withdrawFromContract(userObject.amount).send({
+                from: userObject.address
+            })
+            .then(result=>{
+                resolve(result)
+            })
+            .catch(error=>{
+                errorLogger.constructDetailedError(filename, 'transferEtherFromContractToUser', error);
+                resolve(error);
+            })
+        })
+    }
+
+    static getContractBalance = async ()=>{
+        const contractInfo = getContractInfo();
+        const web = new web3(getWeb3Url());
+        const smartContract = new web.eth.Contract(contractInfo.abi, getContractAddress());
+
+        return new Promise((resolve, reject)=>{
+            
+            smartContract.methods.getContractEtherBalance().call()
+            .then(result=>{
+                resolve(result)
+            })
+            .catch(error=>{
+                errorLogger.constructDetailedError(filename, 'transferEtherFromContractToUser', error);
+                resolve(error);
+            })
+        })
     }
 }
 
