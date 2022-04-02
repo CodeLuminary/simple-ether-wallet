@@ -1,5 +1,5 @@
 const fs = require('fs');
-const {getCurrentDateTime, getTimeZone} = require('./data')
+const {getCurrentDateTime, getTimeZone} = require('../config/config')
 
 class errorLogger{
     static writeError = async (errorText) =>{

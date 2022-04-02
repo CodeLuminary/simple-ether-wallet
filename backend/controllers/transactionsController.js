@@ -1,7 +1,7 @@
 const web3 = require('web3');
 const {getContractInfo, getContractAddress,getCurrentDateTimeInDatabaseFormat, getWeb3Url} = require('../config/config');
 const filename = "userController.js";
-const {Transaction} = require('../models/tables.js')
+const {Transaction} = require("../models/tables");
 
 class TransactionsController{
     static transferEther = async (userObject)=>{

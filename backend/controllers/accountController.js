@@ -1,9 +1,9 @@
 const errorLogger = require('../data/errorLogger')
-const {Users} = require('../models/table')
+const {Users} = require('../models/tables')
 const {getSecretKey, getCurrentDateTimeInDatabaseFormat} = require('../config/config');
 const {hashString, compareHash} = require('../logic/security');
 const jwt = require('jsonwebtoken');
-const mailer = require('../logic/email');
+//const mailer = require('../logic/email');
 const Cryptr = require('cryptr');
 
 

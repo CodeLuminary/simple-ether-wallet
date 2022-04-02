@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const {connectToDB} = require("../models/dbConnect");
+const connectToDB = require("./dbConnect");
 
 const db = connectToDB();
 
