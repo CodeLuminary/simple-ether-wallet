@@ -6,7 +6,7 @@ function App() {
   return (
     
     <div className="App">
-      <Loading shouldShow={true} />
+      <Loading shouldShow={false} />
     </div>
   );
 }
