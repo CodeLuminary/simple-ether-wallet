@@ -2,7 +2,7 @@ class restApi{
     //Set domain name here
     static domain = process.env.DOMAIN_URL;
     //static domain = "http://localhost:8000"
-    static domainState = false;
+    static domainState = true;
 
     static PostApi(url, requestObject, shouldAddAuthorization=false, isDomainUsed=restApi.domainState){   
         if(!isDomainUsed){
@@ -31,9 +31,9 @@ class restApi{
             method: 'GET',
             mode: 'cors',
             cache: 'no-cache',
-            headers: authorizationString && {
+            headers: authorizationString ? {
                 'Authorization': 'Bearer ' + sessionStorage.getItem('eduplus_tkn'),
-            }
+            }:{}
         })
     }
     static PostFormData(url, requestObject, shouldAddAuthorization=false, isDomainUsed=restApi.domainState){

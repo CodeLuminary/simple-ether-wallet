@@ -1,31 +1,48 @@
 import Loading from "./loading";
 import Modal from "./modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Api from "../Api";
-import { memo } from "react";
+import { memo, useMemo } from "react";
 import {useNavigate} from "react-router-dom";
 
 const ApiCall = memo(({apiObject, shouldRun})=>{
     const [modalToggle, setModalToggle] = useState(false);
     const [modalText, setModalText] = useState("");
-    const [showLoading, setShowLoading] = useState(false);
+    const [showLoading, setShowLoading] = useState(true);
 
-    if(shouldRun){
-        setShowLoading(true);
-        Api.PostApi(apiObject.url, apiObject.data, true)
-        .then(response=>{
-            if(apiObject.showModal){
-                setModalText(response.message);
-                setModalToggle(true);
-            }
-        })
-        .catch(error=>{
+    useEffect(()=>{
+        if(shouldRun){
+            console.log("working")
+            //setShowLoading(true);
+            if(apiObject.method==='post')
+                Api.PostApi(apiObject.url, apiObject.data, apiObject.shouldAuthorize)
+                .then(response=>{
+                    if(apiObject.showModal){
+                        setShowLoading(false)
+                        setModalText(response.message);
+                        setModalToggle(true);
+                    }
+                })
+                .catch(error=>{
 
-        })
-    }
-    else{
-        setShowLoading(false);
-    }
+                })
+            else 
+                Api.getApi(apiObject.url,apiObject.shouldAuthorize)
+                .then(response=>{
+                    if(apiObject.showModal){
+                        setShowLoading(false)
+                        setModalText(response.message);
+                        setModalToggle(true);
+                    }
+                })
+                .catch(error=>{
+                })
+        }
+        else{
+            //setShowLoading(false);
+        }
+    }, [])
+
     return (
         <>
             <Loading shouldShow={showLoading} />          
