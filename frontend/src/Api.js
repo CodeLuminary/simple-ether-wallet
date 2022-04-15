@@ -1,6 +1,6 @@
 class restApi{
     //Set domain name here
-    static domain = "http://api.fynass.com";
+    static domain = process.env.DOMAIN_URL;
     //static domain = "http://localhost:8000"
     static domainState = false;
 
