@@ -1,13 +1,16 @@
-
 import './css/App.css';
-import ApiCall from './components/apiCall';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './css/views/login';
 
 function App() {
-  return (
-    
-    <div className="App">
-      <ApiCall shouldRun={true} apiObject={{url: 'https://fakestoreapi.com/products', data: '', showModal: true, shouldAuthorize: false}} />
-    </div>
+  return (   
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login defaultMode={true} />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
