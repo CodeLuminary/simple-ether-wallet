@@ -1,4 +1,4 @@
-@import url("./constants/site_constant.css");
+@import url("../constant.css");
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */   

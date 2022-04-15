@@ -1,4 +1,4 @@
-import modalcss from "../css/component/modal.module.css";
+import modalcss from "../css/components/modal.module.css";
 import { memo } from "react";
 
 const Modal = memo(({ modalObject, modalTogglee, closeModal }) => {
@@ -11,7 +11,7 @@ const Modal = memo(({ modalObject, modalTogglee, closeModal }) => {
                     <h2>{modalObject.header}</h2>
                 </div>
                 <div className={modalcss.modal_body}>
-                    {modalObject.body}
+                    {modalObject.body} 
                 </div>
                 <div className={modalcss.modal_footer}>
                     <h3>{modalObject.footer}</h3>

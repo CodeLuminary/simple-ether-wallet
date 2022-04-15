@@ -1,12 +1,12 @@
 
 import './css/App.css';
-import Loading from "./components/loading"
+import ApiCall from './components/apiCall';
 
 function App() {
   return (
     
     <div className="App">
-      <Loading shouldShow={false} />
+      <ApiCall shouldRun={true} apiObject={{url: '', data: '', showModal: true}} />
     </div>
   );
 }
