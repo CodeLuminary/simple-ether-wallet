@@ -1,0 +1,18 @@
+.login > div:first-child{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login > div:first-child > div{
+    background-image: url('../../images/crypto.jpeg');
+    width: 100%;
+    background-size: cover;
+}
+.login h3{color: var(--primary-color);font-size: 45px;margin-top: 0px;}
+.login_btn{width: 100%;margin-top: 20px;font-weight: bold;font-size: 20px;}
+
+@media  screen and (min-width: 768px) {
+    .login > div:first-child{height: 100vh;padding: 10%;}
+    .login > div:first-child > div{height: 100%;}
+    .login > div:last-child{padding: 10% 5%;}
+}

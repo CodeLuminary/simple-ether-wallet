@@ -1,6 +1,6 @@
 import './css/App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './css/views/login';
+import Login from './views/login';
 
 function App() {
   return (   
