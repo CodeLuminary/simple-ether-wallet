@@ -1,5 +1,5 @@
 import login_style from "../css/views/login.module.css";
-import ApiCall from "../components/apiCall"
+import ApiCall from "../components/apiCall";
 import { useRef, useState } from "react";
 
 const Login = ()=>{

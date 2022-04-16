@@ -8,6 +8,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Login defaultMode={true} />} />
+          
         </Routes>
       </Router>
     </>

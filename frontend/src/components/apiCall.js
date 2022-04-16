@@ -20,11 +20,17 @@ const ApiCall = memo(({apiObject, shouldRun, setShouldRun})=>{
                     console.log(response,'response')
                     setShouldRun(false)
                     setShowLoading(false)
-                    if(apiObject.showModal){
-                        setShowLoading(false)
-                        setModalText(response.message);
-                        setModalToggle(true);
+                    if(response.isSuccessful){
+                        if(apiObject.showModal){
+                            setModalText(response.message);
+                            setModalToggle(true);
+                        }
                     }
+                    else{
+                        setModalText(response.message);
+                        setModalToggle(true); 
+                    }
+
                 })
                 .catch(error=>{
                     console.log(error,'error')
