@@ -1,0 +1,6 @@
+.nav{
+    height: 100vh;
+    width: var(--sidebar-width);
+    background-color: #ccc;
+    float:left;
+}
