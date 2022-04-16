@@ -1,6 +1,6 @@
 class restApi{
     //Set domain name here
-    static domain = process.env.DOMAIN_URL;
+    static domain = process.env.BACKEND_URL;
     //static domain = "http://localhost:8000"
     static domainState = true;
 

@@ -5,18 +5,21 @@ import Api from "../Api";
 import { memo, useMemo } from "react";
 import {useNavigate} from "react-router-dom";
 
-const ApiCall = memo(({apiObject, shouldRun})=>{
+const ApiCall = memo(({apiObject, shouldRun, setShouldRun})=>{
     const [modalToggle, setModalToggle] = useState(false);
     const [modalText, setModalText] = useState("");
-    const [showLoading, setShowLoading] = useState(true);
+    const [showLoading, setShowLoading] = useState(false);
 
     useEffect(()=>{
         if(shouldRun){
             console.log("working")
-            //setShowLoading(true);
+            setShowLoading(true);
             if(apiObject.method==='post')
                 Api.PostApi(apiObject.url, apiObject.data, apiObject.shouldAuthorize)
                 .then(response=>{
+                    console.log(response,'response')
+                    setShouldRun(false)
+                    setShowLoading(false)
                     if(apiObject.showModal){
                         setShowLoading(false)
                         setModalText(response.message);
@@ -24,7 +27,9 @@ const ApiCall = memo(({apiObject, shouldRun})=>{
                     }
                 })
                 .catch(error=>{
-
+                    console.log(error,'error')
+                    setShouldRun(false)
+                    setShowLoading(false);
                 })
             else 
                 Api.getApi(apiObject.url,apiObject.shouldAuthorize)
@@ -41,7 +46,7 @@ const ApiCall = memo(({apiObject, shouldRun})=>{
         else{
             //setShowLoading(false);
         }
-    }, [])
+    }, [shouldRun])
 
     return (
         <>
