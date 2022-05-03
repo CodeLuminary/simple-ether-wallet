@@ -1,35 +1,50 @@
 import login_style from "../css/views/login.module.css";
-import ApiCall from "../components/apiCall";
 import { useRef, useState } from "react";
+import {useNavigate} from "react-router-dom";
+import Modal from "../components/modal";
+import Loading from "../components/loading";
+import {loginUser} from "../HelperFunctions/account";
 
 const Login = ()=>{
     const email = useRef("");
     const password = useRef("");
-    const [shouldRun, setShouldRun] = useState(false);
-    const [apiObject, setApiObject] = useState({});
+
+    const [modalToggle, setModalToggle] = useState(false);
+    const [modalText, setModalText] = useState("");
+    const navigate = useNavigate();
+    const [showLoading, setShowLoading] = useState(false);
+
+    const handleLogin=(e)=>{
+        e.preventDefault();
+        setShowLoading(true);
+        loginUser({
+            email: email.current.value,
+            password: password.current.value
+        })
+        .then(result=>{
+            if(result.isSuccessful){
+                setShowLoading(false);
+                navigate('/adin')
+            }  
+
+        })
+        .catch(error=>{
+            setModalText(`Action failed. user could not be logged in`);
+            setShowLoading(false);
+            setModalToggle(true);
+        })
+    }
 
     return (
         <>
-            <ApiCall apiObject={apiObject} setShouldRun={setShouldRun} shouldRun={shouldRun} />
-            
+            <Loading shouldShow={showLoading} />
+            <Modal modalObject={{ header: "", footer: "", body: modalText }} modalTogglee={modalToggle} closeModal={() => setModalToggle(false)} />
             <div className={`col-12 ${login_style.login}`}>
                 <div className="col-6 col-sm-12">
                     <div></div>
                 </div>
                 <div className="col-6 col-sm-12">
-                    <form onSubmit={(e)=>{
-                        e.preventDefault();
-                        setApiObject({
-                            url: `http://localhost:8000/account/login`,
-                            method: 'post',
-                            shouldAuthorize: false,
-                            data: {
-                                email: email.current.value,
-                                password: password.current.value
-                            }
-                        })
-                        setShouldRun(true)
-                    }}>
+                    <form onSubmit={handleLogin}>
                         <h3>Login</h3>
                         <span className="error"></span><br/>
                         <span className="label label-required">Email</span><br/>
