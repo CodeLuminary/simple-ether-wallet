@@ -65,8 +65,7 @@ class AccountController{
                 
                 if(user == null){
                     
-                    userObject.user_role = "user";
-                    userObject.is_email_verified = 0;
+                    userObject.is_verified = 1;
                     userObject.is_enabled = 1
                     userObject.createdAt = getCurrentDateTimeInDatabaseFormat();
                     userObject.password = await hashString(userObject.password); 
@@ -83,7 +82,7 @@ class AccountController{
                     resolve({
                         isSuccessful: true,
                         status_code: 200,
-                        message: "Registration successful. A mail have been sent to your email, please verify your email"
+                        message: "User registration successful."
                     })       
                 }
                 else{
