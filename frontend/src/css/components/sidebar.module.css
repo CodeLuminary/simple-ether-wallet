@@ -1,6 +1,9 @@
 .nav{
     height: 100vh;
     width: var(--sidebar-width);
-    background-color: #ccc;
+    background-color: #fff;
     float:left;
+    box-shadow: 0 0 15px rgba(0,0,0,0.65);
+    clip-path: inset(0px -15px 0px 0px);
+    padding: 30px;
 }
