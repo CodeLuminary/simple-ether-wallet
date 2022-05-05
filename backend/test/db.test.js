@@ -1,7 +1,7 @@
-const db = require('../models/dbConnect')
+const {syncDatabase} = require('../models/tables');
 
-/*test('Connect to db', ()=>{
-    const dbcon = new db({
-    })
-    expect(dbcon.connectToDb()).toBe('Database connection successfully');
-})*/
+test('Connect to db',async ()=>{
+    const result = await syncDatabase();
+
+    expect(result).toBe('Tables created successfully');
+}) 
