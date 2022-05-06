@@ -4,14 +4,15 @@ const filename = "userController.js";
 const {Wallet} = require("../models/tables");
 const errorLogger = require('../data/errorLogger.js')
 
-class TransactionsController{
+class Web3Controller{
     static transferEther = async (userObject)=>{
         const web = new web3(getWeb3Url());
         //const networkId = await web.eth.net.getId();
 
+
         const transaction = {
             from: userObject.address,
-            to: userObject.isToContract ? getContractAddress() : userObject.reciever_address,
+            to: userObject.reciever_address,
             value: web3.utils.toWei(userObject.value,'ether'),
             //chainId: networkId,
             gas: 500000,
@@ -54,23 +55,26 @@ class TransactionsController{
     }
 
     static getEtherWalletBalance = async(userObject)=>{
-        const web = new web3(getWeb3Url());
-        web.eth.getBalance(userObject.address, (error, result)=>{
-            if(error){
-                errorLogger.constructDetailedError(filename, 'getEtherWalletBalance', error);
-                resolve({
-                    isSuccessful: false,
-                    message: 'Server error',
-                    status_code: 509
-                })
-            }
-            else{
-                //console.log(web3.utils.fromWei(result), "user Balance")
+        return new Promise(async (resolve, reject)=>{
+            try{
+                const web = new web3(getWeb3Url());
+                const result = await web.eth.getBalance(userObject.address);    
+                        //console.log(web3.utils.fromWei(result), "user Balance")
                 resolve({
                     isSuccessful: true,
                     message: 'User balance gotten successfully',
                     status_code: 200,
                     balance: web3.utils.fromWei(result)
+                })
+                    
+
+            }
+            catch(error){
+                errorLogger.constructDetailedError(filename, 'getEtherWalletBalance', error);
+                resolve({
+                    isSuccessful: false,
+                    message: 'server error',
+                    data: error
                 })
             }
         })
@@ -95,8 +99,9 @@ class TransactionsController{
                         message: 'Account created successfully',
                         data: 'Successful',
                         account: {
-                            private_key: newAccount.privateKey,
-                            address: newAccount.address
+                            key: newAccount.privateKey,
+                            public_key: newAccount.address,
+                            balance: '0'
                         }
                     })
                 })
@@ -129,21 +134,75 @@ class TransactionsController{
             */
     }
 
+    static getUserWallets = async (userObject)=>{
+        return new Promise((resolve, reject)=>{
+            try{
+                const web = new web3(getWeb3Url());
+                Wallet.findAll({where:{userId: userObject.userId}})
+                .then(async (result)=>{
+                    const resultLength = result.length;
+                    const finalResult = result;
+                    console.log(resultLength,'length')
+                    for(let i = 0; i < resultLength; i++){
+                        const encryptKey = JSON.parse(result[i].private_key)
+                        const decryptKey = await web.eth.accounts.decrypt(encryptKey, getSecretKey()).privateKey
+                        //finalResult[i].key = decryptKey;
+                        const balance = await Web3Controller.getEtherWalletBalance({address: result[i].public_key});
+
+                        result[i].dataValues.balance = balance.balance;
+                        result[i].dataValues.key = decryptKey
+                        
+                    }
+                    resolve({
+                        isSuccessful: true,
+                        message:'Successful',
+                        data: result
+                    })
+                })
+                .catch(error=>{
+                    errorLogger.constructDetailedError(filename, 'getUserWallets', error);
+                    resolve({
+                        isSuccessful: false,
+                        message: error,
+                        data: error
+                    })
+                })
+            }
+            catch(error){
+                errorLogger.constructDetailedError(filename, 'getUserWallets', error);
+                resolve({
+                    isSuccessful: false,
+                    message: error, 
+                    data: error
+                })
+            }
+        })  
+    }
+
     static transferEtherFromContractToUser = async (userObject)=>{
         const contractInfo = getContractInfo();
         const web = new web3(getWeb3Url());
         const smartContract = new web.eth.Contract(contractInfo.abi, getContractAddress());
 
         return new Promise((resolve, reject)=>{
-            smartContract.methods.withdrawFromContract(userObject.amount).send({
-                from: userObject.address
+            smartContract.methods.withdrawFromContract(userObject.value).send({
+                sender: userObject.reciever_address,
+                from: userObject.reciever_address
             })
             .then(result=>{
-                resolve(result)
+                resolve({
+                    isSuccessful: true,
+                    message: 'Ether transfer successful',
+                    data: result
+                })
             })
             .catch(error=>{
                 errorLogger.constructDetailedError(filename, 'transferEtherFromContractToUser', error);
-                resolve(error);
+                resolve({
+                    isSuccessful: false,
+                    message: 'Action failed. Ether could not be transfered',
+                    data:error
+                });
             })
         })
     }
@@ -167,4 +226,4 @@ class TransactionsController{
     }
 }
 
-module.exports = TransactionsController;
+module.exports = Web3Controller;
