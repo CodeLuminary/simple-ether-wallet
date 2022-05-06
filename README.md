@@ -105,7 +105,14 @@ npm install
 
 The backend test include database connect and table creation test, web3 test and account creation test.
 
-NB: Please some test cases are commented out and the reasons for the comment are at the top of each comment.
+NB: Please some test cases are commented out and the reasons for the comment are at the top of each comment. Please check the test cases in the test folder for details
+
+It's advisable to run the test files one after the order in the following order
+
+- errorLogger.test.js
+- db.test.js
+- accountController.test.js
+- web3Controller.test.js
 
 cd to the backend folder in your terminal and enter the following command
 ```
@@ -116,17 +123,6 @@ npm run test
 
 ## STARTING PROJECT
 
-### STARTING FRONTEND PROJECT
-
-cd to the frontend folder in your terminal and enter the following command
-
-```
-npm start
-```
-
-You can access the project in your browser by entering - `localhost:3000`
-
-
 ### STARTING BACKEND PROJECT
 
 cd to the backend folder in your terminal and enter the following command
@@ -136,6 +132,18 @@ npm start
 ```
 
 Backend opens at port 8000
+
+### STARTING FRONTEND PROJECT
+
+cd to the frontend folder in your terminal and enter the following command
+
+```
+npm start
+```
+
+You can access the project in your browser by entering - `localhost:3000`;
+
+If your backend test is successful, then 
 
 
 ## 🎩 Author
