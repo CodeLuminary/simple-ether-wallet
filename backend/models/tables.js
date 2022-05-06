@@ -70,5 +70,6 @@ module.exports = {
     db,
     Users,
     Transactions,
+    Wallet,
     syncDatabase 
 }
