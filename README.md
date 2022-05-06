@@ -61,7 +61,7 @@ You can copy the code in 'wallet.sol' and paste in [Remix](https://remix.ethereu
 
 cd or navigate to the backend folder from the root folder in your terminal and install backend dependencies
 
-``` 
+```markdown
 #Goto backend
 cd frontend
 
