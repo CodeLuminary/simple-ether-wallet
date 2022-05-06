@@ -1,4 +1,4 @@
-/*const account = require('../controllers/accountController')
+const account = require('../controllers/accountController')
 
 test('Register a user', async ()=>{
     const result = await account.registerUser({
@@ -6,4 +6,4 @@ test('Register a user', async ()=>{
         password: 'password'
     })
     expect(result.message).toBe('User registration successful.');
-})*/
+})

@@ -1,6 +1,9 @@
 const wallet = require('../controllers/web3Controller');
 
-/*test('Test creation of wallet',async ()=>{
+/*
+//This is commented out to avoid always creating a new wallet
+//Uncomment to run test
+test('Test creation of wallet',async ()=>{
     const result = await wallet.createEtherAccount({userId: 1})
     expect(result.data).toBe('Successful');
 })*/
@@ -12,6 +15,8 @@ test('Get wallet balance', async ()=>{
     const result = await wallet.getEtherWalletBalance({address: '0x20c2c61f6731f9C242b90543BE7066Fb68f6dDfe'});
     expect(Number(result.balance)).toBeGreaterThanOrEqual(0);
 })/*
+//This is commented out in order not to drain your test account.
+//Uncomment to run test
 test('Test ether transfer', async ()=>{
     const result = await wallet.transferEther({
         address: '0x7862719A8354DC79B8aa9171329078e20aB2073d', //Set sender address

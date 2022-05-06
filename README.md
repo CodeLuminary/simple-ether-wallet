@@ -57,23 +57,15 @@ ganache-cli
 
 You can copy the code in 'wallet.sol' and paste in [Remix](https://remix.ethereum.org), then compile and deploy to local blockchain.
 
-
-### FRONTEND INSTALLATION
-
-cd or navigate to the frontend folder from the root folder in your terminal and enter the following command 
-
-```
-npm install
-```
 ### BACKEND INSTALLATION
 
-cd or navigate to the backend folder in your terminal and install frontend dependencies
+cd or navigate to the backend folder from the root folder in your terminal and install backend dependencies
 
 ``` 
-# Goto frontend
+#Goto backend
 cd frontend
 
-# Install dependencies
+#Install dependencies
 npm install
 ```
 
@@ -82,16 +74,45 @@ npm install
 Create a .env file in the root directory of the backend folder and add the following properties
 
 ```markdown
-PORT=?
-DB_PORT = ?
 DB_USER = ?
 DB_HOST = ?
 DB_DATABASE = ?
 DB_PASSWORD = ?
 #Set timezone, put 1 if it's GMT+1 or -1 if it's GMT-1
 TIME_ZONE = ?
-SKIP_PREFLIGHT_CHECK=true 
+SECRET_KEY=?
+#Local blockchain url
+WEB3_URL =?
+#Smart contract address
+CONTRACT_ADDRESS=?
 ```
+
+### FRONTEND INSTALLATION
+
+cd or navigate to the frontend folder from the root folder in your terminal and install backend dependencies
+
+```
+#Goto frontend
+cd frontend
+
+#Install dependencies
+npm install
+```
+
+## TEST
+
+### TEST BACKEND PROJECT
+
+The backend test include database connect and table creation test, web3 test and account creation test.
+
+NB: Please some test cases are commented out and the reasons for the comment are at the top of each comment.
+
+cd to the backend folder in your terminal and enter the following command
+```
+npm run test
+```
+
+
 
 ## STARTING PROJECT
 
@@ -106,7 +127,6 @@ npm start
 You can access the project in your browser by entering - `localhost:3000`
 
 
-
 ### STARTING BACKEND PROJECT
 
 cd to the backend folder in your terminal and enter the following command
@@ -115,14 +135,8 @@ cd to the backend folder in your terminal and enter the following command
 npm start
 ```
 
-## TEST
+Backend opens at port 8000
 
-### TEST BACKEND PROJECT
-
-cd to the backend folder in your terminal and enter the following command
-```
-npm run test
-```
 
 ## 🎩 Author
 
