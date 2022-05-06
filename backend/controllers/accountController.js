@@ -3,9 +3,7 @@ const {Users} = require('../models/tables')
 const {getSecretKey, getCurrentDateTimeInDatabaseFormat} = require('../config/config');
 const {hashString, compareHash} = require('../logic/security');
 const jwt = require('jsonwebtoken');
-//const mailer = require('../logic/email');
 const Cryptr = require('cryptr');
-
 
 let cryptr = new Cryptr(getSecretKey()); 
 
@@ -112,16 +110,14 @@ class AccountController{
                     if(user != null){
                         const isEqual = await compareHash(userObject.password, user.dataValues.password);  
                         if(isEqual){
-                            if(user.dataValues.is_email_verified){
+                            if(user.dataValues.is_verified){
                                 if(user.dataValues.is_enabled){
-                                    const token = await AccountController.signToken({user:user.dataValues},getSecretKey(), {expiresIn: '300000'});
+                                    const token = await AccountController.signToken({user:user.dataValues},getSecretKey(), {expiresIn: '30000000'});
                                     resolve({
                                         isSuccessful: true,
                                         message: "User login successful",
                                         status_code: 200,
-                                        user: {
-                                            name: userObject.email
-                                        },
+                                        email: userObject.email,
                                         token: token
                                         
                                     });
@@ -169,6 +165,7 @@ class AccountController{
             }
         });
     }
+    
 }
 
 module.exports = AccountController;
