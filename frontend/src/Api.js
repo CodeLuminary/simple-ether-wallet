@@ -5,6 +5,7 @@ class restApi{
     static domainState = true;
 
     static PostApi(url, requestObject, shouldAddAuthorization=false, isDomainUsed=restApi.domainState){   
+        if(!navigator.onLine){alert("You are offline"); return}
         if(!isDomainUsed){
             url = restApi.domain + url;
         }
@@ -22,6 +23,7 @@ class restApi{
             body: JSON.stringify(requestObject)
         });
     }
+    
     static getApi(url,authorizationString=false,isDomainUsed = restApi.domainState){
         if(!isDomainUsed){
             url = restApi.domain + url;
@@ -31,11 +33,12 @@ class restApi{
             method: 'GET',
             mode: 'cors',
             cache: 'no-cache',
-            headers: authorizationString ? {
+            headers: authorizationString && {
                 'Authorization': 'Bearer ' + sessionStorage.getItem('eduplus_tkn'),
-            }:{}
+            }
         })
     }
+
     static PostFormData(url, requestObject, shouldAddAuthorization=false, isDomainUsed=restApi.domainState){
         if(!isDomainUsed){
             url = restApi.domain + url;
