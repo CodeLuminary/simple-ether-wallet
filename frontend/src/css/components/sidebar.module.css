@@ -6,4 +6,28 @@
     box-shadow: 0 0 15px rgba(0,0,0,0.65);
     clip-path: inset(0px -15px 0px 0px);
     padding: 30px;
+    position:fixed;
+    z-index: 100000
+}
+.nav > span:first-child{
+    color: #fff;
+    background-color: #428bca;
+    padding: 10px 20px
+}
+.menu{
+    margin: 50px -30px 0px;
+}
+.menu > a{
+    display: block;
+    padding: 15px;
+    cursor: pointer;
+    text-decoration:none;
+    color: #333;
+}
+.menu > a >span{
+    margin-left: 5px;
+}
+.highlight{
+    background-color: #f2f2f2;
+    color: #004370 !important;
 }

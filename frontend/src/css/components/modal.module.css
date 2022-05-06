@@ -25,7 +25,8 @@
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-duration: 0.4s;
+    text-align:center
   }
   
   /* Add Animation */

@@ -1,0 +1,12 @@
+.send input, .send select{
+    width: 400px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #d9d9d9;
+    margin: 5px 0px 15px;
+    padding-left: 5px;
+}
+.send input[type="submit"]{
+    color: #fff;
+    background-color: #428bca;
+}

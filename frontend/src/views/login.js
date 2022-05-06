@@ -4,10 +4,13 @@ import {useNavigate} from "react-router-dom";
 import Modal from "../components/modal";
 import Loading from "../components/loading";
 import {loginUser} from "../HelperFunctions/account";
+import {useDispatch} from "react-redux";
+import {setUser} from "../redux/reducers/accountReducer";
 
 const Login = ()=>{
     const email = useRef("");
     const password = useRef("");
+    const dispatch = useDispatch();
 
     const [modalToggle, setModalToggle] = useState(false);
     const [modalText, setModalText] = useState("");
@@ -23,8 +26,14 @@ const Login = ()=>{
         })
         .then(result=>{
             if(result.isSuccessful){
+                sessionStorage.setItem('wallet_tkn', result.token);
+                sessionStorage.setItem('wallet_email', result.email)
+                dispatch(setUser({
+                    email: result.email,
+                    token: result.token
+                }))
                 setShowLoading(false);
-                navigate('/adin')
+                navigate('/admin')
             }  
 
         })

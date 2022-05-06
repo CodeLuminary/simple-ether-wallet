@@ -1,11 +1,10 @@
 class restApi{
     //Set domain name here
-    static domain = process.env.BACKEND_URL;
-    //static domain = "http://localhost:8000"
-    static domainState = true;
+    //static domain = process.env.BACKEND_URL;
+    static domain = "http://localhost:8000"
+    static domainState = false;
 
     static PostApi(url, requestObject, shouldAddAuthorization=false, isDomainUsed=restApi.domainState){   
-        if(!navigator.onLine){alert("You are offline"); return}
         if(!isDomainUsed){
             url = restApi.domain + url;
         }
@@ -15,7 +14,7 @@ class restApi{
             mode: 'cors',
             cache: 'no-cache',
             headers: shouldAddAuthorization ? {
-                'Authorization': 'Bearer ' + sessionStorage.getItem('eduplus_tkn'),
+                'Authorization': 'Bearer ' + sessionStorage.getItem('wallet_tkn'),
                 'Content-Type': 'application/json'
             } : {
                 'Content-Type': 'application/json'
@@ -23,18 +22,18 @@ class restApi{
             body: JSON.stringify(requestObject)
         });
     }
-    
+
     static getApi(url,authorizationString=false,isDomainUsed = restApi.domainState){
         if(!isDomainUsed){
             url = restApi.domain + url;
         }
-
+        
         return fetch(url,{
             method: 'GET',
             mode: 'cors',
             cache: 'no-cache',
             headers: authorizationString && {
-                'Authorization': 'Bearer ' + sessionStorage.getItem('eduplus_tkn'),
+                'Authorization': 'Bearer ' + sessionStorage.getItem('wallet_tkn'),
             }
         })
     }
