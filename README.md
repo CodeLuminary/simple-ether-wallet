@@ -1,4 +1,35 @@
-## SIMPLE ETHER WALLET
+# SIMPLE ETHER WALLET
+
+## Overview
+
+This project is about the creation of an Ether wallet platform where users can create accounts, send and receive ether, and view wallet balance.
+
+It is a low level implementation of platforms like coinbase, luno etc.
+
+## Technology Stack & Tools
+
+- Solidity (Writing Smart Contract)
+- Javascript (React & Node.js)
+- [Web3](https://web3js.readthedocs.io/en/v1.2.11/index.html) (Blockchain Interaction)
+- [Ganache](https://trufflesuite.com/ganache/) (Local blockchain)
+- [Remix](http://remix.ethereum.org/) (Web based solidity compiler)
+- [MySql Workbench](https://dev.mysql.com/) (Local database management tool for MySQL database)
+
+## Requirements For Initial Setup
+- Install [NodeJS](https://nodejs.org/en/),
+- [MySql Workbench](https://dev.mysql.com/)
+
+## Architecture (Data flow)
+
+    Below is the data flow pattern used in this project:
+
+    Frontend(React) <-> Fetch Api <-> Backend(Node.js) <-> Web3 <-> Ganache(Local blockchain)
+
+## Alternative Architecture
+
+    Apart from the above data flow or architectural pattern, the below architectural pattern can also be used with a couple of tweaks:
+
+    Frontend(React) <-> Web3 <-> MetaMask(Web3 connector) <-> Ganache(Local blockchain)
 
 ## Start Development
 
@@ -29,16 +60,20 @@ You can copy the code in 'wallet.sol' and paste in [Remix](https://remix.ethereu
 
 ### FRONTEND INSTALLATION
 
-cd or navigate to the frontend folder in your terminal and enter the following command 
+cd or navigate to the frontend folder from the root folder in your terminal and enter the following command 
 
 ```
 npm install
 ```
 ### BACKEND INSTALLATION
 
-cd or navigate to the backend folder in your terminal and enter the following command
+cd or navigate to the backend folder in your terminal and install frontend dependencies
 
 ``` 
+# Goto frontend
+cd frontend
+
+# Install dependencies
 npm install
 ```
 
