@@ -143,7 +143,10 @@ npm start
 
 You can access the project in your browser by entering - `localhost:3000`;
 
-If your backend test is successful, then 
+If your backend test is successful, then you should have the following login details
+
+- email: johndoe@gmail.com
+- password: password
 
 
 ## 🎩 Author
